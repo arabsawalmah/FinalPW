@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
-
 const URL = process.env.URL || 'https://www.saucedemo.com/';
 
 test.describe('Remove from Cart Features', () => {
