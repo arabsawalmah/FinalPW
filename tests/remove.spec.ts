@@ -1,11 +1,12 @@
 import { test, expect } from '@playwright/test';
-import { DATA } from '../data';
 import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
 
+const URL = process.env.URL || 'https://www.saucedemo.com/';
+
 test.describe('Remove from Cart Features', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(DATA.URL + 'inventory.html');
+    await page.goto(URL + 'inventory.html');
   });
 
   test('Remove single item and verify zero', async ({ page }) => {

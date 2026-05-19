@@ -1,14 +1,16 @@
 import { test, expect } from '@playwright/test';
-import { DATA } from '../data';
-import { LoginPage } from '../pages/LoginPage';
 import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
 
+const URL = process.env.URL || 'https://www.saucedemo.com/';
+const BACKPACK = 'Sauce Labs Backpack';
+const BIKE_LIGHT = 'Sauce Labs Bike Light';
+
 test.describe('Checkout Process', () => {
   test.beforeEach(async ({ page }) => {
     // Already logged in via setup, go straight to inventory
-    await page.goto(DATA.URL + 'inventory.html');
+    await page.goto(URL + 'inventory.html');
   });
 
   test('Checkout with one item', async ({ page }) => {
@@ -24,7 +26,7 @@ test.describe('Checkout Process', () => {
     await checkoutPage.continue();
 
     await expect(page.locator('.inventory_item_name')).toHaveCount(1);
-    await expect(page.locator('.inventory_item_name')).toHaveText(DATA.PRODUCTS.BACKPACK);
+    await expect(page.locator('.inventory_item_name')).toHaveText(BACKPACK);
 
     await checkoutPage.finish();
     await expect(checkoutPage.completeHeader).toHaveText('Thank you for your order!');
@@ -45,8 +47,8 @@ test.describe('Checkout Process', () => {
 
     const items = page.locator('.inventory_item_name');
     await expect(items).toHaveCount(2);
-    await expect(items.nth(0)).toHaveText(DATA.PRODUCTS.BACKPACK);
-    await expect(items.nth(1)).toHaveText(DATA.PRODUCTS.BIKE_LIGHT);
+    await expect(items.nth(0)).toHaveText(BACKPACK);
+    await expect(items.nth(1)).toHaveText(BIKE_LIGHT);
 
     await expect(checkoutPage.subtotalLabel).toContainText('39.98');
 

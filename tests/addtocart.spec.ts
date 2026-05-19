@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
-import { DATA } from '../data';
-import { LoginPage } from '../pages/LoginPage';
 import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
+
+const URL = process.env.URL || 'https://www.saucedemo.com/';
 
 test.describe('Cart Features - Parameterized', () => {
   const itemsToTest = [
@@ -11,7 +11,7 @@ test.describe('Cart Features - Parameterized', () => {
   ];
 
   test.beforeEach(async ({ page }) => {
-    await page.goto(DATA.URL + 'inventory.html');
+    await page.goto(URL + 'inventory.html');
   });
 
   for (const item of itemsToTest) {

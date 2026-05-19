@@ -1,10 +1,11 @@
 import { test, expect } from '@playwright/test';
-import { DATA } from '../data';
 import { InventoryPage } from '../pages/InventoryPage';
+
+const URL = process.env.URL || 'https://www.saucedemo.com/';
 
 test.describe('Sort Feature (A-Z and Price High to Low)', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(DATA.URL + 'inventory.html');
+    await page.goto(URL + 'inventory.html');
   });
 
   test('Sort by Name (A-Z)', async ({ page }) => {
